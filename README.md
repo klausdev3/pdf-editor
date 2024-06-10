@@ -1,4 +1,5 @@
-# pdf-editor
+# pdf-editor on aws infrastructure
+
 This transformer can split and merge PDFs using AWS Lambda and S3, leveraging the PyPDF2 library to handle PDF operations.
 
 Here's how you can do it using an HTML form, JavaScript for handling the file upload, and an AWS API Gateway to trigger the Lambda function for the processing.
