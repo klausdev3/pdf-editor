@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PDF Transformer</title>
+</head>
+<body>
+    <h1>PDF Transformer</h1>
+    <form id="pdfForm">
+        <label for="file">Upload PDF:</label>
+        <input type="file" id="file" name="file" accept="application/pdf" required>
+        <br><br>
+        <input type="radio" id="split" name="action" value="split" checked>
+        <label for="split">Split PDF</label><br>
+        <input type="radio" id="merge" name="action" value="merge">
+        <label for="merge">Merge PDF</label><br><br>
+        <button type="submit">Submit</button>
+    </form>
+
+    <script>
+        document.getElementById('pdfForm').addEventListener('submit', async function(event) {
+            event.preventDefault();
+            
+            const fileInput = document.getElementById('file');
+            const file = fileInput.files[0];
+            const action = document.querySelector('input[name="action"]:checked').value;
+            
+            const formData = new FormData();
+            formData.append('file', file);
+            
+            const apiUrl = action === 'split' ? 'YOUR_SPLIT_API_ENDPOINT' : 'YOUR_MERGE_API_ENDPOINT';
+            
+            try {
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                if (response.ok) {
+                    const result = await response.json();
+                    alert('PDF processed successfully!');
+                } else {
+                    alert('Error processing PDF');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Error processing PDF');
+            }
+        });
+    </script>
+</body>
+</html>
